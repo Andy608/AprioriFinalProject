@@ -1,6 +1,9 @@
 #ifndef STORE_H
 #define STORE_H
+
 #include <iostream>
+#include "ShoppingCart.h"
+
 using namespace std;
 
 class Store
@@ -29,7 +32,7 @@ public:
 	string getStoreFileName() const;
 	void setStoreFileName(string storeName);
 
-	bool createItemList();
+	bool createStore(int& shoppingCartLength);
 	const int& getItemByID(const int &itemID) const;
 };
 

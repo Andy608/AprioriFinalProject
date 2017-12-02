@@ -2,8 +2,8 @@
 #include "header.h"
 #include <iostream>
 #include <string>
-#include <fstream>
-#include <sstream>
+
+
 
 const int Store::BAD_ID = -1;
 
@@ -44,12 +44,13 @@ void Store::setStoreFileName(string storeName)
 	mStoreFileName = storeName;
 }
 
-bool Store::createItemList()
+bool Store::createStore(int& shoppingCartLength)
 {
 	//Parse file name to get size of list.
 	//If file name is empty then return false.
 	if (mStoreFileName.empty())
 	{
+		cout << "File does not exist" << endl;
 		return false;
 	}
 
@@ -65,6 +66,11 @@ bool Store::createItemList()
 	int endIndex = mStoreFileName.find_first_of("K");
 	float listSize = atof(mStoreFileName.substr(startIndex, endIndex - startIndex).c_str());
 
+	startIndex = mStoreFileName.find_first_of("D") + 1;
+	endIndex = mStoreFileName.find_last_of("K");
+	float numberOfShoppingCarts = atof(mStoreFileName.substr(startIndex, endIndex - startIndex).c_str());
+	shoppingCartLength = static_cast<int>(numberOfShoppingCarts * SIZE_INCREMENT);
+
 	//Set the size of the list.
 	setCapacity(listSize * SIZE_INCREMENT);
 
@@ -79,9 +85,10 @@ bool Store::createItemList()
 		//End when end of file
 
 		string line;
+		int lineNumber = 0;
 		while (getline(inputStream, line))
 		{
-			cout << line << endl;
+			//ShoppingCart shoppingCart;
 
 			stringstream lineStream(line);
 			int itemID;
@@ -89,26 +96,31 @@ bool Store::createItemList()
 			while (lineStream >> itemID)
 			{
 				addItemToList(itemID);
+				//shoppingCart.addItemToCart(getItemByID(itemID));
 			}
+
+			//shoppingCarts[lineNumber] = shoppingCart;
+			//lineNumber++;
 		}
 	}
 
 	inputStream.close();
 
-	for (int i = 0; i < mNumberOfItems; ++i)
+	/*for (int i = 0; i < mNumberOfItems; ++i)
 	{
 		cout << mItems[i] << " ";
 	}
-	cout << endl << endl;
+	cout << endl << endl;*/
 
 	//Quick sort list.
 	quickSort(mItems, 0, mNumberOfItems - 1);
 
-	for (int i = 0; i < mNumberOfItems; ++i)
+	/*for (int i = 0; i < mNumberOfItems; ++i)
 	{
 		cout << mItems[i] << " ";
 	}
-	cout << endl;
+
+	cout << endl; */
 }
 
 void Store::addItemToList(int itemID)

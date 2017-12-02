@@ -1,8 +1,9 @@
 #ifndef HEADER_H
 #define HEADER_H
 
-#include <iostream>
 #include <string>
+#include <sstream>
+#include <fstream>
 #include "Association.h"
 #include "Itemset.h"
 #include "ShoppingCart.h"
@@ -10,8 +11,8 @@
 
 
 	void Apriori();
-	void createShoppingCarts();
-
+	void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts);
+	string getFilename();
 
 	/* Pre:		The lowerbound, and upperbound index.
 	*  Post:	Sorts the list of data in decending to ascending order.

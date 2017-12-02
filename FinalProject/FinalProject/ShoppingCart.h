@@ -8,7 +8,7 @@ class ShoppingCart
 private:
 
 	int *mTransaction;
-	int mNumberOfTransactions;
+	int mNumberOfItems;
 
 public:
 	ShoppingCart();
@@ -17,7 +17,7 @@ public:
 	int getNumberOfTransactions();
 	void setNumberOfTransactions(int length);
 
-
+	void addItemToCart(const int& item);
 };
 
 

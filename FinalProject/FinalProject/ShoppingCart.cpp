@@ -2,8 +2,8 @@
 
 ShoppingCart::ShoppingCart()
 {
-	mNumberOfTransactions = 0;
-	mTransaction = new int[mNumberOfTransactions];
+	mTransaction = nullptr;
+	mNumberOfItems = 0;
 }
 
 ShoppingCart::~ShoppingCart()
@@ -13,11 +13,31 @@ ShoppingCart::~ShoppingCart()
 
 int ShoppingCart::getNumberOfTransactions()
 {
-	return mNumberOfTransactions;
+	return mNumberOfItems;
 }
 
 void ShoppingCart::setNumberOfTransactions(int length)
 {
-	mNumberOfTransactions = length;
-	mTransaction = new int[mNumberOfTransactions];
+	mNumberOfItems = length;
+	mTransaction = new int[mNumberOfItems];
+}
+
+void ShoppingCart::addItemToCart(const int& item)
+{
+	mNumberOfItems++;
+
+	int *tempArray = new int[mNumberOfItems];
+
+	int i, oldSize = mNumberOfItems - 1;
+	for (i = 0; i < oldSize; ++i)
+	{
+		tempArray[i] = mTransaction[i];
+	}
+
+	tempArray[mNumberOfItems - 1] = item;
+
+	if(mTransaction != nullptr)
+		delete[] mTransaction;
+	
+	mTransaction = tempArray;
 }
