@@ -1,8 +1,2 @@
-﻿  Store.cpp
-c:\users\walter.hill\documents\github\apriorifinalproject\finalproject\finalproject\store.cpp(67): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\walter.hill\documents\github\apriorifinalproject\finalproject\finalproject\store.cpp(71): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\walter.hill\documents\github\apriorifinalproject\finalproject\finalproject\store.cpp(75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  FinalProject.cpp
-  Generating Code...
-c:\users\walter.hill\documents\github\apriorifinalproject\finalproject\finalproject\store.cpp(124): warning C4715: 'Store::createStore': not all control paths return a value
-  FinalProject.vcxproj -> C:\Users\walter.hill\Documents\GitHub\AprioriFinalProject\FinalProject\Debug\FinalProject.exe
+﻿  Funtions.cpp
+  FinalProject.vcxproj -> C:\Users\Andre\OneDrive\Documents\GitHub\AprioriFinalProject\FinalProject\Debug\FinalProject.exe

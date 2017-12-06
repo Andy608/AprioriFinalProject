@@ -64,15 +64,15 @@ bool Store::createStore(int& shoppingCartLength)
 
 	int startIndex = mStoreFileName.find_first_of("N") + 1;
 	int endIndex = mStoreFileName.find_first_of("K");
-	float listSize = atof(mStoreFileName.substr(startIndex, endIndex - startIndex).c_str());
+	double listSize = atof(mStoreFileName.substr(startIndex, endIndex - startIndex).c_str());
 
 	startIndex = mStoreFileName.find_first_of("D") + 1;
 	endIndex = mStoreFileName.find_last_of("K");
-	float numberOfShoppingCarts = atof(mStoreFileName.substr(startIndex, endIndex - startIndex).c_str());
+	double numberOfShoppingCarts = atof(mStoreFileName.substr(startIndex, endIndex - startIndex).c_str());
 	shoppingCartLength = static_cast<int>(numberOfShoppingCarts * SIZE_INCREMENT);
 
 	//Set the size of the list.
-	setCapacity(listSize * SIZE_INCREMENT);
+	setCapacity(static_cast<int>(listSize * SIZE_INCREMENT));
 
 	//Go into the store file.
 	ifstream inputStream(mStoreFileName);
@@ -121,6 +121,8 @@ bool Store::createStore(int& shoppingCartLength)
 	}
 
 	cout << endl; */
+
+	return true;
 }
 
 void Store::addItemToList(int itemID)
@@ -150,4 +152,9 @@ const int& Store::getItemByID(const int &itemID) const
 	}
 
 	return BAD_ID;
+}
+
+const int& Store::getItemByIndex(int index) const
+{
+	return mItems[index];
 }

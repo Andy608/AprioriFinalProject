@@ -34,6 +34,7 @@ public:
 
 	bool createStore(int& shoppingCartLength);
 	const int& getItemByID(const int &itemID) const;
+	const int& getItemByIndex(int index) const;
 };
 
 #endif // !STORE_H

@@ -8,9 +8,10 @@
 #include "Itemset.h"
 #include "ShoppingCart.h"
 #include "Store.h"
+#include "LinkedList.h"
 
 
-	void Apriori();
+	void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSize, LinkedList<Itemset>& totalItemsets);
 	void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts);
 	string getFilename();
 

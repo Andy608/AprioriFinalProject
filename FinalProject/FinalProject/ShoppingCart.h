@@ -14,8 +14,9 @@ public:
 	ShoppingCart();
 	~ShoppingCart();
 
-	int getNumberOfTransactions();
-	void setNumberOfTransactions(int length);
+	int getNumberOfItems();
+	void setNumberOfItems(int length);
+	const int& getItemAtIndex(int index) const;
 
 	void addItemToCart(const int& item);
 };

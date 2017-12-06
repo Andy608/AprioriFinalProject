@@ -1,17 +1,32 @@
 #ifndef ITEMSET_H
 #define ITEMSET_H
 
+#include <string>
+#include "LinkedList.h"
+using namespace std;
+
 class Itemset
 {
 private:
 	int mSizeOfItemset;
 	int *mItems;
+	int mSupport;
 
 public:
 	Itemset();
+	Itemset(int *items, int length);
 	~Itemset();
 
-	void createItemSet(int *items, int length);
+	//void populateItemSet(int *items, int length);
+	int getSupport() const;
+	string getItemset() const;
+	void incrementSupport();
+	int getSizeOfItemset() const;
+	static void addNewItemsets(const Itemset& first, const Itemset& second, int newItemsetSize, LinkedList<Itemset>& newItemsets);
+
+	int operator[](int itemsetIndex) const;
+
+	friend ostream& operator<<(ostream &output, Itemset itemset);
 };
 
 

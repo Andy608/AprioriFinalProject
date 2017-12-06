@@ -11,12 +11,12 @@ ShoppingCart::~ShoppingCart()
 	delete[] mTransaction;
 }
 
-int ShoppingCart::getNumberOfTransactions()
+int ShoppingCart::getNumberOfItems()
 {
 	return mNumberOfItems;
 }
 
-void ShoppingCart::setNumberOfTransactions(int length)
+void ShoppingCart::setNumberOfItems(int length)
 {
 	mNumberOfItems = length;
 	mTransaction = new int[mNumberOfItems];
@@ -40,4 +40,9 @@ void ShoppingCart::addItemToCart(const int& item)
 		delete[] mTransaction;
 	
 	mTransaction = tempArray;
+}
+
+const int& ShoppingCart::getItemAtIndex(int index) const
+{
+	return mTransaction[index];
 }
