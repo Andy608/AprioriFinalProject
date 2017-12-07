@@ -6,6 +6,7 @@ void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts)
 	//Go into the store file.
 	ifstream inputStream(store.getStoreFileName()); 
 
+	//as long as the file can be opened
 	if (inputStream.is_open())
 	{
 		string line;
@@ -15,12 +16,14 @@ void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts)
 			stringstream lineStream(line);
 			int itemID;
 
+			//take in all of the items from the store by the id and set them to the shopping car as 
+			//long as they are there
 			while (lineStream >> itemID)
 			{				
 				shoppingCarts[lineNumber].addItemToCart(store.getItemByID(itemID));
 			}
 
-
+			//increase the line number which is also the index
 			lineNumber++;
 		}
 		cout << "Shopping carts populated!" << endl;
@@ -33,8 +36,8 @@ void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts)
 
 void getFilename(string& inputFile, string& outputFile)
 {
-	string Ifilename;
-	string Ofilename;
+	string iFileName;
+	string oFileName;
 
 	system("cls");
 
@@ -44,17 +47,17 @@ void getFilename(string& inputFile, string& outputFile)
 
 	cout << "Enter the name of the dataset (include file ending). " << endl << "OR" << endl 
 		 << "Enter 'exit' to quit the program." << endl;
-	cin >> Ifilename;
-	inputFile = Ifilename;
-
+	cin >> iFileName;
+	inputFile = iFileName;
+	//if the user enters exit, the file will stop
 	if (inputFile == EXIT)
 	{
 		return;
 	}
 
 	cout << "Enter the name of the output (include file ending): ";
-	cin >> Ofilename;
-	outputFile = Ofilename;	
+	cin >> oFileName;
+	outputFile = oFileName;
 }
 
 
@@ -63,25 +66,33 @@ void generateFrequentOneItemsets(const Store& store, ShoppingCart* shoppingCarts
 {
 	cout << "Generating Frequent-1 Itemsets...";
 
+	//create vars
 	Itemset temp;
 	int i, j, k;
 	int support, itemsetLength = 1;
 
+	//loops through as long as i is less than the store amount of items
 	for (i = 0; i < store.getNumberOfItems(); ++i)
 	{
+		//assigning the itemset to an object in the store
 		int *itemset = new int[itemsetLength];
 		itemset[0] = store.getItemByIndex(i);
 		support = 0;
 
+		//as long as it is less than the shopping cart
 		for (j = 0; j < shoppingCartSize; ++j)
 		{
 			for (k = 0; k < shoppingCarts->getNumberOfItems(); ++k)
 			{
+				//checks to see if the store itemset object is equal to the shopping carts objects
+				//adds to the support
 				if (itemset[0] == shoppingCarts[j].getItemAtIndex(k))
 					support++;			
 			}
 		}
 
+		//if the support is greater than the minumum support, add to the temporary itemset
+		//then assign this value to the frequent and total itemsets
 		if (support >= MINIMUM_SUPPORT)
 		{
 			temp = Itemset(itemset, 1);
@@ -106,6 +117,7 @@ void generateFrequentNItemsets(ShoppingCart* shoppingCarts, int shoppingCartSize
 
 	do
 	{
+		//clears the list
 		nextItemsets.clear();
 		itemsetLength++;
 
@@ -116,65 +128,75 @@ void generateFrequentNItemsets(ShoppingCart* shoppingCarts, int shoppingCartSize
 		{
 			for (g = i + 1; g < previousItemsets.getCount(); ++g)
 			{
-				//candidate set
+				//creating candidate sets
 				Itemset itemsetI = previousItemsets.getData(i);
 				Itemset itemsetG = previousItemsets.getData(g);
 				Itemset::addNewItemsets(itemsetI, itemsetG, itemsetLength, candidateItemsets);
 			}
-
+			//goes through until it reaches the end of the candidate itemsets
 			for (h = 0; h < candidateItemsets.getCount(); ++h)
 			{
+				//gets the first current itemset
 				currentItemset = candidateItemsets.getData(h);
-
+				//goes through untill it reaches the end of the shopping cart size
 				for (j = 0; j < shoppingCartSize; ++j)
 				{
 					supportCount = 0;
-
+					//goes through until it reaches the end of the items in the shopping cart
 					for (k = 0; k < shoppingCarts[j].getNumberOfItems(); ++k)
 					{
 						//checking in shoppingcart against each item in the itemset
 						for (f = 0; f < currentItemset.getSizeOfItemset(); ++f)
 						{
+							//if the current itemset and the item at that index is equal to the shopping cart, add to its support count
 							if (currentItemset.getItemAtIndex(f) == shoppingCarts[j].getItemAtIndex(k))
 								supportCount++;
 						}
-
+						//if the support is equal to the size of the curent itemset
 						if (supportCount == currentItemset.getSizeOfItemset())
 						{
+							//increment the support of the current itemset
 							currentItemset.incrementSupport();
+							//restart the support count
 							supportCount = 0;
 						}
 					}
 				}
-
+				//if th ecurrent itemset support is greater than the minimum support
 				if (currentItemset.getSupport() >= MINIMUM_SUPPORT)
 				{
+					//add the items to the total itemsets and to the next itemset to be checked later
 					totalItemsets.insert(currentItemset);
 					nextItemsets.insert(currentItemset);
 				}
 			}
-
+			//clear the candidate itemsets
 			candidateItemsets.clear();
 		}
-		
+		//clear the prevous itemsets
 		previousItemsets.clear();
 
+		//as long as i is less then the next itemsets length
 		for (int i = 0; i < nextItemsets.getCount(); ++i)
 		{
+			//insert the passing itemsets to the previous itemsets
 			previousItemsets.insert(nextItemsets.getData(i));
 		}
 
 		cout << " Done!!!!!!!!!" << endl;
+		//do while the next itemset is not empty
 	} while (!nextItemsets.isEmpty());
 }
 
 
 void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSize, LinkedList<Itemset>& totalItemsets)
 {
+	//create the variable and get the frequent one itemset
 	LinkedList<Itemset> freqOneItemsets;
 	
 	generateFrequentOneItemsets(store, shoppingCarts, shoppingCartSize, freqOneItemsets, totalItemsets);
 
+	//create the variables for all the other itemsets and get the frequent itemsets
 	LinkedList<Itemset> previousItemsets = freqOneItemsets;
 	LinkedList<Itemset> nextItemsets;
 	LinkedList<Itemset> candidateItemsets;
@@ -185,6 +207,7 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 
 void outputFrequentItemsets(LinkedList<Itemset> itemsetOutput, string& outputFilename)
 {
+	//output the frequent itemset
 	ofstream fout;
 	string file = outputFilename;
 

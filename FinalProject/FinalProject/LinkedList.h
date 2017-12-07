@@ -57,6 +57,10 @@ class LinkedList
 
    public:
       LinkedList();
+	  /*      Pre:  Linked List 
+	  *     Post:  Copies the linked list over to another linked list
+	  *  Purpose:  Copies the data from a linked list into another linked list.
+	  ************************************************************************/
 	  LinkedList(LinkedList<T>& another);
       ~LinkedList();
 
@@ -112,10 +116,7 @@ LinkedList<T>::LinkedList(LinkedList<T>& another) :
 		tmp = tmp->mNext;
 	}
 
-	/*for (int i = 0; i < another.mCount; i++)
-	{
-		insert(another.getData(i));
-	}*/
+	
 }
 
 
