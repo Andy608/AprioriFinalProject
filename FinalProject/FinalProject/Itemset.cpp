@@ -35,12 +35,6 @@ Itemset::~Itemset()
 	}
 }
 
-/*void Itemset::populateItemSet(int *items, int length)
-{
-	mSizeOfItemset = length;
-	mItems = items;
-}*/
-
 int Itemset::getSupport() const
 {
 	return mSupport;
@@ -126,11 +120,7 @@ int Itemset::getSizeOfItemset() const
 {
 	return mSizeOfItemset;
 }
-/*
-int Itemset::operator[](int itemsetIndex) const
-{
-	return mItems[itemsetIndex];
-}*/
+
 
 bool Itemset::operator==(Itemset another) const
 {

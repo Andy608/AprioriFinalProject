@@ -9,11 +9,13 @@
      *  Certification of Authenticity:
      *     I certify that this assignment is entirely my own work.
      ********************************************************************/
+//This file has been slightly edited for this apriori program
 
 #ifndef LINKED_LIST
 #define LINKED_LIST
 
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -64,6 +66,7 @@ class LinkedList
 
       void clear();
       void display();
+	  ostream& display(ofstream &output); //display overload added
       void insert(T data);
       bool isEmpty();
       bool isExist(T searchKey);
@@ -243,6 +246,33 @@ void LinkedList<T>::display()
       tmp = tmp->mNext;
    }
    cout << endl;
+}
+
+
+/*      Pre:  The list is instantiated
+*     Post:  The entire list is displayed to a file
+*  Purpose:  Store the content of the list in a file
+************************************************************************/
+template <typename T>
+ostream& LinkedList<T>::display(ofstream &output)
+{
+	Node<T> *tmp;
+
+	if (mHead == NULL)
+	{
+		output << "The list is empty\n";
+		return output;
+	}
+
+	tmp = mHead;
+	while (tmp != NULL)
+	{
+		output << tmp->mData << " ";
+		tmp = tmp->mNext;
+	}
+	cout << endl;
+
+	return output;
 }
 
 

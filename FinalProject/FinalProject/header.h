@@ -1,21 +1,26 @@
 #ifndef HEADER_H
 #define HEADER_H
 
-#include <string>
-#include <iostream>
 #include <sstream>
-#include <fstream>
-#include "Association.h"
 #include "Itemset.h"
+#include "LinkedList.h"
 #include "ShoppingCart.h"
 #include "Store.h"
-#include "LinkedList.h"
 
-using namespace std;
+const int MINIMUM_SUPPORT = 3;
 
 void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSize, LinkedList<Itemset>& totalItemsets);
 void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts);
+
+void generateFrequentNItemsets(ShoppingCart* shoppingCarts, int shoppingCartSize, LinkedList<Itemset>& previousItemsets,
+	LinkedList<Itemset>& nextItemsets, LinkedList<Itemset>& candidateItemsets, LinkedList<Itemset>& totalItemsets);
+
+void generateFrequentOneItemsets(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSize, 
+								 LinkedList<Itemset> &freqOneItemsets, LinkedList<Itemset>& totalItemsets);
+
 string getFilename();
+void outputFrequentItemsets(LinkedList<Itemset> itemsetOutput);
+
 
 /* Pre:		The lowerbound, and upperbound index.
 *  Post:	Sorts the list of data in decending to ascending order.

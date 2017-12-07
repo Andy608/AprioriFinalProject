@@ -1,6 +1,5 @@
 #include "header.h"
 
-const int MINIMUM_SUPPORT = 3;
 
 void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts)
 {
@@ -38,6 +37,7 @@ void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts)
 	system("pause");
 }
 
+
 string getFilename()
 {
 	string filename;
@@ -49,9 +49,10 @@ string getFilename()
 	return filename;
 }
 
-void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSize, LinkedList<Itemset>& totalItemsets)
+
+void generateFrequentOneItemsets(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSize, 
+								 LinkedList<Itemset> &freqOneItemsets, LinkedList<Itemset>& totalItemsets)
 {
-	LinkedList<Itemset> freqOneItemsets;
 	Itemset temp;
 	int i, j, k;
 	int support, itemsetLength = 1;
@@ -85,39 +86,21 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 			totalItemsets.insert(temp);
 		}
 
+		
 		delete[] itemset;
 	}
-
-	/*LinkedList<Itemset> newFrequentItemset;
-	itemsetLength++;
-
-	for (int k = 0; k < freqOneItemsets.getCount(); k++)
-	{
-		for (int g = k; g < freqOneItemsets.getCount(); g++)
-		{
-			
-			Itemset *itemset = new Itemset[itemsetLength];
-
-			itemset[0] = freqOneItemsets.getData(k);
-			itemset[1] = freqOneItemsets.getData(g);
-
-			if (itemset[0] != itemset[1])
-			{
-				Itemset temp = Itemset(itemset, 2);
-			}
-		}
-	}*/
-
-
-	//////////////////////////////////
 	
+	//tst
+	//freqOneItemsets.display();
+}
 
-	LinkedList<Itemset> previousItemsets = freqOneItemsets;
-	LinkedList<Itemset> nextItemsets;
-	LinkedList<Itemset> candidateItemsets;
+
+void generateFrequentNItemsets(ShoppingCart* shoppingCarts, int shoppingCartSize, LinkedList<Itemset>& previousItemsets, 
+							   LinkedList<Itemset>& nextItemsets, LinkedList<Itemset>& candidateItemsets, LinkedList<Itemset>& totalItemsets)
+{
 	Itemset currentItemset;
-	int supportCount;
-	itemsetLength = 1;
+	int supportCount, i, j, k;
+	int itemsetLength = 1;
 
 	do
 	{
@@ -158,10 +141,10 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 						{
 							//[] overloading the bracket operator to get the item at the index of 'fuck'
 
-							/*if (currentItemset.getItemAtIndex(fuck) == 0 && shoppingCarts[j].getItemAtIndex(k) == 0 || 
-								currentItemset.getItemAtIndex(fuck) == 756 && shoppingCarts[j].getItemAtIndex(k) == 756)
+							/*if (currentItemset.getItemAtIndex(fuck) == 0 && shoppingCarts[j].getItemAtIndex(k) == 0 ||
+							currentItemset.getItemAtIndex(fuck) == 756 && shoppingCarts[j].getItemAtIndex(k) == 756)
 							{
-								system("pause");
+							system("pause");
 							}*/
 
 							if (currentItemset.getItemAtIndex(fuck) == shoppingCarts[j].getItemAtIndex(k))
@@ -191,8 +174,7 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 		}
 
 		//nextItemsets.display();
-		////
-
+		
 		previousItemsets.clear();
 		//previousItemsets = LinkedList<Itemset>(nextItemsets);
 
@@ -202,49 +184,34 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 		}
 
 		previousItemsets.display();
+		//system("pause");
 
 	} while (!nextItemsets.isEmpty());
+}
+
+
+void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSize, LinkedList<Itemset>& totalItemsets)
+{
+	LinkedList<Itemset> freqOneItemsets;
 	
+	generateFrequentOneItemsets(store, shoppingCarts, shoppingCartSize, freqOneItemsets, totalItemsets);
+
+	LinkedList<Itemset> previousItemsets = freqOneItemsets;
+	LinkedList<Itemset> nextItemsets;
+	LinkedList<Itemset> candidateItemsets;
+
+	generateFrequentNItemsets(shoppingCarts, shoppingCartSize, previousItemsets, nextItemsets, candidateItemsets, totalItemsets);
+}
 
 
+void outputFrequentItemsets(LinkedList<Itemset> itemsetOutput)
+{
+	ofstream fout;
+	string file = "output_apriori.txt";
 
-	//////////////////////////////////
+	fout.open(file, ios::out);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/*if (freqOneItemsets[0].getItemset(contains(freqOneItemsets[1])))
-	{
-
-	}
-	else
-	{
-		int itemset = new int[lengthofprevious + 1];
-		itemset[0] = freq1itemset.getIdbyindex()
-		itemset[1] = feq1itemset[1]
-
-		temp = Itemset(itemset, length of previous set + 1);
-		freqOneItemsets.insert()
-	}*/
-
+	itemsetOutput.display(fout);
+	
+	fout.close();
 }

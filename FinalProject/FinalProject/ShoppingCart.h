@@ -21,8 +21,4 @@ public:
 	void addItemToCart(const int& item);
 };
 
-
-
-
-
 #endif // !SHOPPINGCART_H
