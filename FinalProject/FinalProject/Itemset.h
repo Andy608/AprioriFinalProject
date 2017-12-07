@@ -14,6 +14,7 @@ private:
 
 public:
 	Itemset();
+	Itemset(Itemset& another);
 	Itemset(int *items, int length);
 	~Itemset();
 

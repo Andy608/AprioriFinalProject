@@ -8,13 +8,22 @@ Itemset::Itemset() :
 }
 
 Itemset::Itemset(int *items, int length) :
-	mSizeOfItemset(length), mSupport(0)
+	mSizeOfItemset(length), mItems(new int[length]), mSupport(0)
 {
-	mItems = new int[length];
 	int i;
 	for (i = 0; i < length; ++i)
 	{
 		mItems[i] = items[i];
+	}
+}
+
+Itemset::Itemset(Itemset& another) : 
+	mSizeOfItemset(another.mSizeOfItemset), mItems(new int[mSizeOfItemset]), mSupport(another.mSupport)
+{
+	int i;
+	for (i = 0; i < mSizeOfItemset; ++i)
+	{
+		mItems[i] = another.mItems[i];
 	}
 }
 
@@ -41,6 +50,11 @@ string Itemset::getItemset() const
 {
 	string output = "";
 	int i;
+
+	if (mItems == nullptr)
+	{
+		return " { null } ";
+	}
 
 	output += " { " + std::to_string(mItems[0]);
 

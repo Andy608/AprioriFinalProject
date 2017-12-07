@@ -158,6 +158,9 @@
     <ClCompile Include="ShoppingCart.cpp" />
     <ClCompile Include="Store.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="T5.N1K.D1K.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

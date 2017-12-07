@@ -1,6 +1,6 @@
 #include "header.h"
 
-const int MINIMUM_SUPPORT = 5;
+const int MINIMUM_SUPPORT = 3;
 
 void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts)
 {
@@ -116,6 +116,7 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 	LinkedList<Itemset> nextItemsets;
 	LinkedList<Itemset> candidateItemsets;
 	Itemset currentItemset;
+	int supportCount;
 	itemsetLength = 1;
 
 	do
@@ -129,7 +130,9 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 			for (int g = i + 1; g < previousItemsets.getCount(); ++g)
 			{
 				//candidate set
-				Itemset::addNewItemsets(previousItemsets.getData(i), previousItemsets.getData(g), itemsetLength, candidateItemsets);
+				Itemset itemsetI = previousItemsets.getData(i);
+				Itemset itemsetG = previousItemsets.getData(g);
+				Itemset::addNewItemsets(itemsetI, itemsetG, itemsetLength, candidateItemsets);
 			}
 
 			// { 1 }
@@ -137,35 +140,46 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 			// { 1 1 2 2 }
 			// { 1 2 6 }
 
+			//candidateItemsets.display();
+
 			for (int help = 0; help < candidateItemsets.getCount(); ++help)
 			{
 				currentItemset = candidateItemsets.getData(help);
 
 				for (j = 0; j < shoppingCartSize; ++j)
 				{
-					for (k = 0; k < shoppingCarts->getNumberOfItems(); ++k)
+					supportCount = 0;
+
+					for (k = 0; k < shoppingCarts[j].getNumberOfItems(); ++k)
 					{
 						//checking in shoppingcart against each item in the itemset
-						int supportCount = 0;
 
 						for (int fuck = 0; fuck < currentItemset.getSizeOfItemset(); ++fuck)
 						{
 							//[] overloading the bracket operator to get the item at the index of 'fuck'
+
+							/*if (currentItemset.getItemAtIndex(fuck) == 0 && shoppingCarts[j].getItemAtIndex(k) == 0 || 
+								currentItemset.getItemAtIndex(fuck) == 756 && shoppingCarts[j].getItemAtIndex(k) == 756)
+							{
+								system("pause");
+							}*/
+
 							if (currentItemset.getItemAtIndex(fuck) == shoppingCarts[j].getItemAtIndex(k))
 							{
 								supportCount++;
-								break;
+								//break;
 							}
 						}
 
 						if (supportCount == currentItemset.getSizeOfItemset())
 						{
 							currentItemset.incrementSupport();
+							supportCount = 0;
 						}
 					}
 				}
 
-				if (support >= MINIMUM_SUPPORT)
+				if (currentItemset.getSupport() >= MINIMUM_SUPPORT)
 				{
 					totalItemsets.insert(currentItemset);
 					nextItemsets.insert(currentItemset);
@@ -176,9 +190,16 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 			candidateItemsets.clear();
 		}
 
-		
-		previousItemsets = nextItemsets;
-		previousItemsets.display();
+		//nextItemsets.display();
+		////
+
+		previousItemsets.clear();
+		//previousItemsets = LinkedList<Itemset>(nextItemsets);
+
+		for (int i = 0; i < nextItemsets.getCount(); ++i)
+		{
+			previousItemsets.insert(nextItemsets.getData(i));
+		}
 
 		previousItemsets.display();
 

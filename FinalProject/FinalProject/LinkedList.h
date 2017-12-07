@@ -55,6 +55,7 @@ class LinkedList
 
    public:
       LinkedList();
+	  LinkedList(LinkedList<T>& another);
       ~LinkedList();
 
       int  getCount();
@@ -83,6 +84,35 @@ LinkedList<T>::LinkedList()
    mHead = NULL;
    mTail = NULL;
    mCount = 0;
+}
+
+template <typename T>
+LinkedList<T>::LinkedList(LinkedList<T>& another) : 
+	mHead(NULL), mTail(NULL), mCount(0)
+{
+
+	Node<T> *tmp = another.mHead;
+	int i;
+
+	if (tmp == nullptr)
+	{
+		return;
+	}
+
+	for (i = 0; i < another.getCount(); i++)
+	{
+		if (tmp != nullptr)
+		{
+ 			insert(tmp->mData);
+		}
+
+		tmp = tmp->mNext;
+	}
+
+	/*for (int i = 0; i < another.mCount; i++)
+	{
+		insert(another.getData(i));
+	}*/
 }
 
 
