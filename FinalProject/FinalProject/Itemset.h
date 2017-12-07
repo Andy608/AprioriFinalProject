@@ -22,11 +22,13 @@ public:
 	string getItemset() const;
 	void incrementSupport();
 	int getSizeOfItemset() const;
-	static void addNewItemsets(const Itemset& first, const Itemset& second, int newItemsetSize, LinkedList<Itemset>& newItemsets);
+	static void addNewItemsets(Itemset& first, Itemset& second, int newItemsetSize, LinkedList<Itemset>& newItemsets);
 
-	int operator[](int itemsetIndex) const;
+	//int operator[](int itemsetIndex) const;
 	bool operator==(Itemset another) const;
+	int getItemAtIndex(int index);
 
+	//int operator[](int itemsetIndex) const;
 	friend ostream& operator<<(ostream &output, Itemset itemset);
 };
 

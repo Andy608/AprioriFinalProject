@@ -54,12 +54,21 @@ string Itemset::getItemset() const
 	return output;
 }
 
+int Itemset::getItemAtIndex(int index)
+{
+	int result;
+
+	result = mItems[index];
+
+	return result;
+}
+
 void Itemset::incrementSupport()
 {
 	mSupport++;
 }
 
-void Itemset::addNewItemsets(const Itemset& first, const Itemset& second, int newItemsetSize, LinkedList<Itemset>& newItemsets)
+void Itemset::addNewItemsets(Itemset& first, Itemset& second, int newItemsetSize, LinkedList<Itemset>& newItemsets)
 {
 	Itemset newItemset;
 	newItemset.mSizeOfItemset = newItemsetSize;
@@ -74,7 +83,7 @@ void Itemset::addNewItemsets(const Itemset& first, const Itemset& second, int ne
 
 	for (int i = 0; i < comparisonSize; ++i)
 	{
-		if (first[i] != second[i])
+		if (first.getItemAtIndex(i) != second.getItemAtIndex(i))
 		{
 			return;
 		}
@@ -82,18 +91,18 @@ void Itemset::addNewItemsets(const Itemset& first, const Itemset& second, int ne
 
 	for (int i = 0; i < comparisonSize; ++i)
 	{
-		newItemset.mItems[i] = first[i];
+		newItemset.mItems[i] = first.getItemAtIndex(i);
 	}
 
-	if (first[comparisonSize] < second[comparisonSize])
+	if (first.getItemAtIndex(comparisonSize) < second.getItemAtIndex(comparisonSize))
 	{
-		newItemset.mItems[comparisonSize] = first[comparisonSize];
-		newItemset.mItems[comparisonSize + 1] = second[comparisonSize];
+		newItemset.mItems[comparisonSize] = first.getItemAtIndex(comparisonSize);
+		newItemset.mItems[comparisonSize + 1] = second.getItemAtIndex(comparisonSize);
 	}
 	else
 	{
-		newItemset.mItems[comparisonSize] = second[comparisonSize];
-		newItemset.mItems[comparisonSize + 1] = first[comparisonSize];
+		newItemset.mItems[comparisonSize] = second.getItemAtIndex(comparisonSize);
+		newItemset.mItems[comparisonSize + 1] = first.getItemAtIndex(comparisonSize);
 	}
 
 	newItemsets.insert(newItemset);
@@ -103,11 +112,11 @@ int Itemset::getSizeOfItemset() const
 {
 	return mSizeOfItemset;
 }
-
+/*
 int Itemset::operator[](int itemsetIndex) const
 {
 	return mItems[itemsetIndex];
-}
+}*/
 
 bool Itemset::operator==(Itemset another) const
 {
@@ -118,7 +127,7 @@ bool Itemset::operator==(Itemset another) const
 
 	for (int i = 0; i < mSizeOfItemset; ++i)
 	{
-		if (mItems[i] != another[i])
+		if (mItems[i] != another.getItemAtIndex(i))
 		{
 			return false;
 		}
