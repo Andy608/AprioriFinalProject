@@ -1,9 +1,23 @@
+/*
+Author: Walter Hill, Andrew Rimpici, Kelly Herstine
+Class: Data Structures & Algorithims (CSI 281-01)
+Assignment: Apriori Final Project
+Date Assigned: 11/16/17
+Due Date: 12/8/17
+
+Program Description: Final Project - Apriori Program
+
+Certification of Authenticity:
+I certify that this is entirely my own work, except where I have given fully-documented references to the work of others.
+I understand the definition and consequences of plagiarism and acknowledge that the assessor of this assignment may,
+for the purpose of assessing this assignment:- Reproduce this assignment and provide a copy to another member of
+academic staff; and/or - Communicate a copy of this assignment to a plagiarism checking service
+(which may then retain a copy of this assignment on its database for the purpose of future plagiarism checking)
+*/
+
+
 #include "Store.h"
 #include "header.h"
-#include <iostream>
-#include <string>
-
-
 
 const int Store::BAD_ID = -1;
 
@@ -61,7 +75,6 @@ bool Store::createStore(int& shoppingCartLength)
 	- y is the number of items (in thousand)
 	- z is the number of transaction (in thousand)
 	*/
-
 	int startIndex = mStoreFileName.find_first_of("N") + 1;
 	int endIndex = mStoreFileName.find_first_of("K");
 	double listSize = atof(mStoreFileName.substr(startIndex, endIndex - startIndex).c_str());
@@ -69,6 +82,7 @@ bool Store::createStore(int& shoppingCartLength)
 	startIndex = mStoreFileName.find_first_of("D") + 1;
 	endIndex = mStoreFileName.find_last_of("K");
 	double numberOfShoppingCarts = atof(mStoreFileName.substr(startIndex, endIndex - startIndex).c_str());
+
 	shoppingCartLength = static_cast<int>(numberOfShoppingCarts * SIZE_INCREMENT);
 
 	//Set the size of the list.
@@ -79,16 +93,12 @@ bool Store::createStore(int& shoppingCartLength)
 
 	if (inputStream.is_open())
 	{
-		//In a while loop that goes through the whole file.
-		//Separate numbers by spaces
-		//If a number comes up that is not in the list, append to the list.
-		//End when end of file
 
 		string line;
 		int lineNumber = 0;
+
 		while (getline(inputStream, line))
 		{
-			//ShoppingCart shoppingCart;
 
 			stringstream lineStream(line);
 			int itemID;
@@ -96,11 +106,7 @@ bool Store::createStore(int& shoppingCartLength)
 			while (lineStream >> itemID)
 			{
 				addItemToList(itemID);
-				//shoppingCart.addItemToCart(getItemByID(itemID));
 			}
-
-			//shoppingCarts[lineNumber] = shoppingCart;
-			//lineNumber++;
 		}
 	}
 	else
@@ -111,21 +117,8 @@ bool Store::createStore(int& shoppingCartLength)
 
 	inputStream.close();
 
-	/*for (int i = 0; i < mNumberOfItems; ++i)
-	{
-		cout << mItems[i] << " ";
-	}
-	cout << endl << endl;*/
-
 	//Quick sort list.
 	quickSort(mItems, 0, mNumberOfItems - 1);
-
-	/*for (int i = 0; i < mNumberOfItems; ++i)
-	{
-		cout << mItems[i] << " ";
-	}
-
-	cout << endl; */
 
 	return true;
 }
