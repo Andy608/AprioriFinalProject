@@ -1,6 +1,6 @@
 #include "header.h"
 
-const int MINIMUM_SUPPORT = 2;
+const int MINIMUM_SUPPORT = 5;
 
 void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts)
 {
@@ -115,18 +115,19 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 	LinkedList<Itemset> previousItemsets = freqOneItemsets;
 	LinkedList<Itemset> nextItemsets;
 	LinkedList<Itemset> candidateItemsets;
+	Itemset currentItemset;
 	itemsetLength = 1;
 
 	do
 	{
 		nextItemsets.clear();
+		itemsetLength++;
 
 		// Change from store to previous list of itemsets
 		for (i = 0; i < previousItemsets.getCount(); ++i)
 		{
-			itemsetLength++;
-			for (int g = i; g < previousItemsets.getCount(); ++g)
-			{
+			for (int g = i + 1; g < previousItemsets.getCount(); ++g)
+			{ 
 				//candidate set
 				Itemset::addNewItemsets(previousItemsets.getData(i), previousItemsets.getData(g), itemsetLength, candidateItemsets);
 			}
@@ -138,7 +139,7 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 
 			for (int help = 0; help < candidateItemsets.getCount(); ++help)
 			{
-				Itemset currentItemset = candidateItemsets.getData(help);
+				currentItemset = candidateItemsets.getData(help);
 
 				for (j = 0; j < shoppingCartSize; ++j)
 				{
@@ -176,6 +177,7 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 		}
 
 		previousItemsets = nextItemsets;
+		previousItemsets.display();
 
 	} while (!nextItemsets.isEmpty());
 	

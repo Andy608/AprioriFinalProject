@@ -65,6 +65,11 @@ void Itemset::addNewItemsets(const Itemset& first, const Itemset& second, int ne
 	newItemset.mSizeOfItemset = newItemsetSize;
 	newItemset.mItems = new int[newItemset.mSizeOfItemset];
 
+	if (first == second)
+	{
+		return;
+	}
+
 	int comparisonSize = newItemsetSize - 2;
 
 	for (int i = 0; i < comparisonSize; ++i)
@@ -102,6 +107,24 @@ int Itemset::getSizeOfItemset() const
 int Itemset::operator[](int itemsetIndex) const
 {
 	return mItems[itemsetIndex];
+}
+
+bool Itemset::operator==(Itemset another) const
+{
+	if (mSizeOfItemset != another.mSizeOfItemset)
+	{
+		return false;
+	}
+
+	for (int i = 0; i < mSizeOfItemset; ++i)
+	{
+		if (mItems[i] != another[i])
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 ostream& operator<<(ostream &output, Itemset itemset)

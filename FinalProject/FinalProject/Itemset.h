@@ -25,6 +25,7 @@ public:
 	static void addNewItemsets(const Itemset& first, const Itemset& second, int newItemsetSize, LinkedList<Itemset>& newItemsets);
 
 	int operator[](int itemsetIndex) const;
+	bool operator==(Itemset another) const;
 
 	friend ostream& operator<<(ostream &output, Itemset itemset);
 };
