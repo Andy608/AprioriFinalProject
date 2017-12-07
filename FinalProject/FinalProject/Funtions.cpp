@@ -120,12 +120,13 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 	do
 	{
 		nextItemsets.clear();
+		itemsetLength++;
 
 		// Change from store to previous list of itemsets
 		for (i = 0; i < previousItemsets.getCount(); ++i)
 		{
-			itemsetLength++;
-			for (int g = i; g < previousItemsets.getCount(); ++g)
+			
+			for (int g = i+1; g < previousItemsets.getCount(); ++g)
 			{
 				//candidate set
 				Itemset::addNewItemsets(previousItemsets.getData(i), previousItemsets.getData(g), itemsetLength, candidateItemsets);
@@ -150,7 +151,7 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 						for (int fuck = 0; fuck < currentItemset.getSizeOfItemset(); ++fuck)
 						{
 							//[] overloading the bracket operator to get the item at the index of 'fuck'
-							if (currentItemset[fuck] == shoppingCarts[j].getItemAtIndex(k))
+							if (currentItemset.getItemAtIndex(fuck) == shoppingCarts[j].getItemAtIndex(k))
 							{
 								supportCount++;
 								break;
@@ -175,7 +176,10 @@ void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSi
 			candidateItemsets.clear();
 		}
 
+		
 		previousItemsets = nextItemsets;
+
+		previousItemsets.display();
 
 	} while (!nextItemsets.isEmpty());
 	
