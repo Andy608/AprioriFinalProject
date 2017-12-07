@@ -267,7 +267,7 @@ ostream& LinkedList<T>::display(ofstream &output)
 	tmp = mHead;
 	while (tmp != NULL)
 	{
-		output << tmp->mData << " ";
+		output << tmp->mData << endl;
 		tmp = tmp->mNext;
 	}
 	cout << endl;

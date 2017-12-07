@@ -8,6 +8,7 @@
 #include "Store.h"
 
 const int MINIMUM_SUPPORT = 3;
+const string EXIT = "exit";
 
 void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSize, LinkedList<Itemset>& totalItemsets);
 void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts);
@@ -18,8 +19,8 @@ void generateFrequentNItemsets(ShoppingCart* shoppingCarts, int shoppingCartSize
 void generateFrequentOneItemsets(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSize, 
 								 LinkedList<Itemset> &freqOneItemsets, LinkedList<Itemset>& totalItemsets);
 
-string getFilename();
-void outputFrequentItemsets(LinkedList<Itemset> itemsetOutput);
+void getFilename(string& inputFile, string& outputFile);
+void outputFrequentItemsets(LinkedList<Itemset> itemsetOutput, string& outputFilename);
 
 
 /* Pre:		The lowerbound, and upperbound index.

@@ -103,6 +103,11 @@ bool Store::createStore(int& shoppingCartLength)
 			//lineNumber++;
 		}
 	}
+	else
+	{
+		cout << "Input file does not exist." << endl;
+		return false;
+	}
 
 	inputStream.close();
 
