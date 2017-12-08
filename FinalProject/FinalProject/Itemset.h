@@ -99,14 +99,14 @@ public:
 	*  Post:	Makes the item object to the itemset
 	*  Purpose: Adds a new item to the itemset
 	*****************************************************************************/
-	static Itemset Itemset::itemToItemset(const int& item);
+	static Itemset itemToItemset(const int& item);
 
 
 	/* Pre:		Itemset
 	*  Post:	Assigns itemset on right to the one on the left
 	*  Purpose: Overloads assigment operator
 	*****************************************************************************/
-	void Itemset::operator=(Itemset &another);
+	void operator=(Itemset &another);
 
 
 	/* Pre:		Itemset
