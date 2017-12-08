@@ -100,7 +100,7 @@ void generateFrequentOneItemsets(const Store& store, ShoppingCart* shoppingCarts
 		//as long as it is less than the shopping cart
 		for (j = 0; j < shoppingCartSize; ++j)
 		{
-			for (k = 0; k < shoppingCarts->getNumberOfItems(); ++k)
+			for (k = 0; k < shoppingCarts[j].getNumberOfItems(); ++k)
 			{
 				//checks to see if the store itemset object is equal to the shopping carts objects
 				//adds to the support
