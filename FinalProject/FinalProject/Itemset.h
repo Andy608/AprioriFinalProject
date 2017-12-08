@@ -15,7 +15,6 @@ academic staff; and/or - Communicate a copy of this assignment to a plagiarism c
 (which may then retain a copy of this assignment on its database for the purpose of future plagiarism checking)
 */
 
-
 #ifndef ITEMSET_H
 #define ITEMSET_H
 
@@ -37,53 +36,71 @@ public:
 	*  Purpose: Creates the default values for the vars
 	*****************************************************************************/
 	Itemset();
+
+
 	/* Pre:		Itemset object
 	*  Post:	Copy constructor for the itemset
 	*  Purpose: Copy the information from the one itemset into the other
 	*****************************************************************************/
 	Itemset(Itemset& another);
+
+
 	/* Pre:		an integer and the length
 	*  Post:	Overloaded constructor of the itemset
 	*  Purpose: Uses the given information and assigns the new vars
 	*****************************************************************************/
 	Itemset(int *items, int length);
+
+
 	/* Pre:		None
 	*  Post:	Deconstructs the pointers
 	*  Purpose: Deconstructs the pointers
 	*****************************************************************************/
 	~Itemset();
 
+
 	/* Pre:		None
 	*  Post:	Gets the support var of the itemset
 	*  Purpose: Returns the support var of the itemset
 	*****************************************************************************/
 	int getSupport() const;
+
+
 	/* Pre:		None
 	*  Post:	Gets the itemset
 	*  Purpose: Gets the itemset and sets it up in {}
 	*****************************************************************************/
 	string getItemset() const;
+
+
 	/* Pre:		None
 	*  Post:	Incriment the support of the itemset
 	*  Purpose: Incriment the support of the itemset
 	*****************************************************************************/
 	void incrementSupport();
+
+
 	/* Pre:		None
 	*  Post:	Gets the size of the itemset
 	*  Purpose: Returns the size of the itemset
 	*****************************************************************************/
 	int getSizeOfItemset() const;
+
+
 	/* Pre:		the first itemset, the second itemset, the size of the new itemset, and the linked list of the 
 				new itemset
 	*  Post:	Adds new itemsets to the overall itemset 
 	*  Purpose: Adds each new itemset to the overall itemset linked list
 	*****************************************************************************/
 	static void addNewItemsets(Itemset& first, Itemset& second, int newItemsetSize, LinkedList<Itemset>& newItemsets);
+
+
 	/* Pre:		the int item
 	*  Post:	Makes the item object to the itemset
 	*  Purpose: Adds a new item to the itemset
 	*****************************************************************************/
 	static Itemset itemToItemset(const int& item);
+
 
 	/* Pre:		Itemset
 	*  Post:	Checks to see whether one itemset is equal to another
@@ -91,11 +108,14 @@ public:
 				itself to
 	*****************************************************************************/
 	bool operator==(Itemset another) const;
+
+
 	/* Pre:		index number
 	*  Post:	Gets the item at the index number
 	*  Purpose: Gets the item at the index number
 	*****************************************************************************/
 	int getItemAtIndex(int index);
+
 
 	/* Pre:		gets the output file and the itemset with all of the itemsets
 	*  Post:	Outputs all the itemsets that are given
@@ -103,6 +123,5 @@ public:
 	*****************************************************************************/
 	friend ostream& operator<<(ostream &output, Itemset itemset);
 };
-
 
 #endif // !ITEMSET_H

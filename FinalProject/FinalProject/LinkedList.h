@@ -11,7 +11,7 @@
      ********************************************************************/
 
 /*
-Author: Walter Hill, Andrew Rimpici, Kelly Herstine
+Edited by: Walter Hill, Andrew Rimpici, Kelly Herstine
 Class: Data Structures & Algorithims (CSI 281-01)
 Assignment: Apriori Final Project
 Date Assigned: 11/16/17

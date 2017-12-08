@@ -15,7 +15,6 @@ academic staff; and/or - Communicate a copy of this assignment to a plagiarism c
 (which may then retain a copy of this assignment on its database for the purpose of future plagiarism checking)
 */
 
-
 #include "ShoppingCart.h"
 
 ShoppingCart::ShoppingCart()
@@ -48,8 +47,10 @@ void ShoppingCart::addItemToCart(const int& item)
 
 	tempArray[mNumberOfItems - 1] = item;
 
-	if(mTransaction != nullptr)
+	if (mTransaction != nullptr)
+	{
 		delete[] mTransaction;
+	}
 	
 	mTransaction = tempArray;
 }

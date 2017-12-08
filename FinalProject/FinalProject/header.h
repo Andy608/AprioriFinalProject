@@ -15,7 +15,6 @@ academic staff; and/or - Communicate a copy of this assignment to a plagiarism c
 (which may then retain a copy of this assignment on its database for the purpose of future plagiarism checking)
 */
 
-
 #ifndef HEADER_H
 #define HEADER_H
 
@@ -35,11 +34,13 @@ const string EXIT = "exit";
 *****************************************************************************/
 void apriori(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSize, LinkedList<Itemset>& totalItemsets);
 
+
 /* Pre:		The store object and the shopping cart object
 *  Post:	Creates the shopping carts that will be used for the apriori algorithm
 *  Purpose: Creates the shopping carts from the items inside of the store object
 *****************************************************************************/
 void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts);
+
 
 /* Pre:		The shopping cart object, the shopping cart size the linked list of the previous itemsets, the linked
 			list of the next itemsets, the linked list of the candidate item sets, and the linked list of the total itemsets
@@ -50,6 +51,7 @@ void createShoppingCarts(Store &store, ShoppingCart *shoppingCarts);
 void generateFrequentNItemsets(ShoppingCart* shoppingCarts, int shoppingCartSize, LinkedList<Itemset>& previousItemsets,
 	LinkedList<Itemset>& nextItemsets, LinkedList<Itemset>& candidateItemsets, LinkedList<Itemset>& totalItemsets);
 
+
 /* Pre:		The store object, the shopping cart object, the size of the shopping carts, the frequent one itemset and the
 			total itemset
 *  Post:	Generates the frequent itemset for the 1st itemset
@@ -59,11 +61,13 @@ then into a linked list to store the information of the reoccuring frequent item
 void generateFrequentOneItemsets(const Store& store, ShoppingCart* shoppingCarts, int shoppingCartSize, 
 								 LinkedList<Itemset> &freqOneItemsets, LinkedList<Itemset>& totalItemsets);
 
+
 /* Pre:		The inputFilename and the output file name
 *  Post:	Gets the filename and opens them so the program can use the information inside of them
 *  Purpose: To open the filenames tthat the user gives the program
 *****************************************************************************/
 void getFilename(string& inputFile, string& outputFile);
+
 
 /* Pre:		The itemset and the filename
 *  Post:	Outputs the frequent itemset to the output file

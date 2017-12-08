@@ -15,13 +15,13 @@ academic staff; and/or - Communicate a copy of this assignment to a plagiarism c
 (which may then retain a copy of this assignment on its database for the purpose of future plagiarism checking)
 */
 
-
 #include "Store.h"
 #include "header.h"
 
 const int Store::BAD_ID = -1;
 
-Store::Store() : mItems(nullptr), mStoreFileName(), mCapacity(0), mNumberOfItems(0)
+Store::Store() : 
+	mItems(nullptr), mStoreFileName(), mCapacity(0), mNumberOfItems(0)
 {
 
 }

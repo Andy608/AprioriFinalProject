@@ -15,10 +15,9 @@ academic staff; and/or - Communicate a copy of this assignment to a plagiarism c
 (which may then retain a copy of this assignment on its database for the purpose of future plagiarism checking)
 */
 
-
 #include "Itemset.h"
 
-Itemset::Itemset() :
+Itemset::Itemset() : 
 	mItems(nullptr), mSizeOfItemset(0), mSupport(0)
 {
 
