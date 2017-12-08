@@ -93,9 +93,10 @@ void generateFrequentOneItemsets(const Store& store, ShoppingCart* shoppingCarts
 	//loops through as long as i is less than the store amount of items
 	for (i = 0; i < store.getNumberOfItems(); ++i)
 	{
+		
 		//assigning the itemset to an object in the store
-		currentItemset = Itemset::itemToItemset(store.getItemByIndex(i));
-
+		currentItemset = Itemset::itemToItemset(store.getItemByIndex(i)); 
+		
 		//as long as it is less than the shopping cart
 		for (j = 0; j < shoppingCartSize; ++j)
 		{
@@ -104,9 +105,7 @@ void generateFrequentOneItemsets(const Store& store, ShoppingCart* shoppingCarts
 				//checks to see if the store itemset object is equal to the shopping carts objects
 				//adds to the support
 				if (currentItemset.getItemAtIndex(0) == shoppingCarts[j].getItemAtIndex(k))
-				{
 					currentItemset.incrementSupport();
-				}
 			}
 		}
 
@@ -114,9 +113,11 @@ void generateFrequentOneItemsets(const Store& store, ShoppingCart* shoppingCarts
 		//then assign this value to the frequent and total itemsets
 		if (currentItemset.getSupport() >= MINIMUM_SUPPORT)
 		{
+				
 			freqOneItemsets.insert(Itemset(currentItemset));
 			totalItemsets.insert(Itemset(currentItemset));
 		}
+
 	}
 
 	cout << " Done!!!!!!!!!" << endl;
@@ -210,6 +211,7 @@ void generateFrequentNItemsets(ShoppingCart* shoppingCarts, int shoppingCartSize
 
 		//do while the next itemset is not empty
 	} while (!nextItemsets.isEmpty());
+
 }
 
 

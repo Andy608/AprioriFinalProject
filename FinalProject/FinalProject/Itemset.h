@@ -42,7 +42,7 @@ public:
 	*  Post:	Copy constructor for the itemset
 	*  Purpose: Copy the information from the one itemset into the other
 	*****************************************************************************/
-	Itemset(Itemset& another);
+	Itemset(const Itemset& another);
 
 
 	/* Pre:		an integer and the length
@@ -99,7 +99,14 @@ public:
 	*  Post:	Makes the item object to the itemset
 	*  Purpose: Adds a new item to the itemset
 	*****************************************************************************/
-	static Itemset itemToItemset(const int& item);
+	static Itemset Itemset::itemToItemset(const int& item);
+
+
+	/* Pre:		Itemset
+	*  Post:	Assigns itemset on right to the one on the left
+	*  Purpose: Overloads assigment operator
+	*****************************************************************************/
+	void Itemset::operator=(Itemset &another);
 
 
 	/* Pre:		Itemset
@@ -107,7 +114,7 @@ public:
 	*  Purpose: Checks to see whether the passed in itemset is equal to another itemset that it is comparing
 				itself to
 	*****************************************************************************/
-	bool operator==(Itemset another) const;
+	bool operator==(Itemset &another) const;
 
 
 	/* Pre:		index number

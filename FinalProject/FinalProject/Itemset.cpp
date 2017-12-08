@@ -33,7 +33,7 @@ Itemset::Itemset(int *items, int length) :
 	}
 }
 
-Itemset::Itemset(Itemset& another) : 
+Itemset::Itemset(const Itemset& another) : 
 	mSizeOfItemset(another.mSizeOfItemset), mItems(new int[mSizeOfItemset]), mSupport(another.mSupport)
 {
 	int i;
@@ -45,7 +45,7 @@ Itemset::Itemset(Itemset& another) :
 
 Itemset::~Itemset()
 {
-	if (mItems == nullptr)
+	if (mItems != nullptr)
 	{
 		delete[] mItems;
 	}
@@ -138,13 +138,32 @@ Itemset Itemset::itemToItemset(const int& item)
 	return newItemset;
 }
 
+
 int Itemset::getSizeOfItemset() const
 {
 	return mSizeOfItemset;
 }
 
 
-bool Itemset::operator==(Itemset another) const
+void Itemset::operator=(Itemset &another)
+{
+	mSupport = another.mSupport;
+	mSizeOfItemset = another.mSizeOfItemset;
+	
+	if (mItems != nullptr)
+	{
+		delete[]mItems;
+	}
+
+	mItems = new int[mSizeOfItemset];
+
+	for (int i = 0; i < mSizeOfItemset; i++)
+	{
+		mItems[i] = another.mItems[i];
+	}
+}
+
+bool Itemset::operator==(Itemset &another) const
 {
 	if (mSizeOfItemset != another.mSizeOfItemset)
 	{
@@ -153,7 +172,7 @@ bool Itemset::operator==(Itemset another) const
 
 	for (int i = 0; i < mSizeOfItemset; ++i)
 	{
-		if (mItems[i] != another.getItemAtIndex(i))
+		if (mItems[i] != another.mItems[i])
 		{
 			return false;
 		}
