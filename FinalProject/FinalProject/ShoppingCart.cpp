@@ -34,12 +34,6 @@ int ShoppingCart::getNumberOfItems()
 	return mNumberOfItems;
 }
 
-void ShoppingCart::setNumberOfItems(int length)
-{
-	mNumberOfItems = length;
-	mTransaction = new int[mNumberOfItems];
-}
-
 void ShoppingCart::addItemToCart(const int& item)
 {
 	mNumberOfItems++;

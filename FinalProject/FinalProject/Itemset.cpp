@@ -133,6 +133,12 @@ void Itemset::addNewItemsets(Itemset& first, Itemset& second, int newItemsetSize
 	newItemsets.insert(newItemset);
 }
 
+Itemset Itemset::itemToItemset(const int& item)
+{
+	Itemset newItemset(new int[1]{ item }, 1);
+	return newItemset;
+}
+
 int Itemset::getSizeOfItemset() const
 {
 	return mSizeOfItemset;

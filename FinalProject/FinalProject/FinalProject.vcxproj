@@ -157,6 +157,7 @@
     <ClCompile Include="Store.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\..\..\..\..\Downloads\dataset\dataset\T25.N1K.D100K.txt" />
     <Text Include="T5.N1K.D1K.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

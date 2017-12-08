@@ -52,5 +52,8 @@
     <Text Include="T5.N1K.D1K.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="..\..\..\..\..\Downloads\dataset\dataset\T25.N1K.D100K.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

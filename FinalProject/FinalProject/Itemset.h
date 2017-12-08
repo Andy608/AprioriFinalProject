@@ -79,6 +79,11 @@ public:
 	*  Purpose: Adds each new itemset to the overall itemset linked list
 	*****************************************************************************/
 	static void addNewItemsets(Itemset& first, Itemset& second, int newItemsetSize, LinkedList<Itemset>& newItemsets);
+	/* Pre:		the int item
+	*  Post:	Makes the item object to the itemset
+	*  Purpose: Adds a new item to the itemset
+	*****************************************************************************/
+	static Itemset itemToItemset(const int& item);
 
 	/* Pre:		Itemset
 	*  Post:	Checks to see whether one itemset is equal to another

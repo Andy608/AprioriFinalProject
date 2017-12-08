@@ -44,11 +44,6 @@ public:
 	*  Purpose: Returns the number of items in the shopping cart to the program
 	*****************************************************************************/
 	int getNumberOfItems();
-	/* Pre:		length of the shopping cart
-	*  Post:	Sets the number of items of the shopping cart
-	*  Purpose: Sets the number of shopping carts due to the length passed into it
-	*****************************************************************************/
-	void setNumberOfItems(int length);
 	/* Pre:		the item index
 	*  Post:	Gets the item at the index given
 	*  Purpose: returns the item at the given index

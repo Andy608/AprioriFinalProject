@@ -84,7 +84,7 @@ void generateFrequentOneItemsets(const Store& store, ShoppingCart* shoppingCarts
 	cout << "Generating Frequent-1 Itemsets...";
 
 	//create vars
-	Itemset temp;
+	/*Itemset temp;
 	int i, j, k;
 	int support, itemsetLength = 1;
 
@@ -119,6 +119,42 @@ void generateFrequentOneItemsets(const Store& store, ShoppingCart* shoppingCarts
 
 		
 		delete[] itemset;
+	}
+
+	cout << " Done!!!!!!!!!" << endl;*/
+	//create vars
+	Itemset currentItemset;
+	int i, j, k;
+	int itemsetLength = 1;
+
+	//loops through as long as i is less than the store amount of items
+	for (i = 0; i < store.getNumberOfItems(); ++i)
+	{
+		//assigning the itemset to an object in the store
+		//int *itemset = new int[itemsetLength];
+		//itemset[0] = store.getItemByIndex(i);
+		//support = 0;
+		currentItemset = Itemset::itemToItemset(store.getItemByIndex(i));
+
+		//as long as it is less than the shopping cart
+		for (j = 0; j < shoppingCartSize; ++j)
+		{
+			for (k = 0; k < shoppingCarts->getNumberOfItems(); ++k)
+			{
+				//checks to see if the store itemset object is equal to the shopping carts objects
+				//adds to the support
+				if (currentItemset.getItemAtIndex(0) == shoppingCarts[j].getItemAtIndex(k))
+					currentItemset.incrementSupport();
+			}
+		}
+
+		//if the support is greater than the minumum support, add to the temporary itemset
+		//then assign this value to the frequent and total itemsets
+		if (currentItemset.getSupport() >= MINIMUM_SUPPORT)
+		{
+			freqOneItemsets.insert(currentItemset);
+			totalItemsets.insert(currentItemset);
+		}
 	}
 
 	cout << " Done!!!!!!!!!" << endl;
